@@ -239,7 +239,7 @@ export default function Page() {
 
       <div className="p-5 flex flex-col items-center justify-center gap-2">
         <p className="text-[#434634] font-fahk font-medium text-center">
-          Casamento
+          DEZEMBRO
         </p>
         <div className="flex gap-3 items-center">
           <p className="text-[#434634] font-fahk font-medium text-center">
@@ -249,7 +249,7 @@ export default function Page() {
             29
           </p>
           <p className="text-[#434634] font-fahk font-medium text-center">
-            DEZEMBRO
+            16 HORAS
           </p>
         </div>
         <p className="text-[#434634] font-fahk font-medium text-center">2025</p>
