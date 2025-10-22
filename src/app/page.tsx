@@ -17,7 +17,10 @@ export default function Page() {
   const [nome, setNome] = useState("");
   const [loading, setLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowOverlay(false), 2500);
@@ -43,26 +46,25 @@ export default function Page() {
   }, [isPlaying]);
 
   useEffect(() => {
-  if (!showOverlay) {
-    const timer = setTimeout(() => {
-      if (!audioRef.current) {
-        audioRef.current = new Audio("/audio/trilha-sonora.mp3");
-        audioRef.current.loop = true;
-      }
+    if (!showOverlay) {
+      const timer = setTimeout(() => {
+        if (!audioRef.current) {
+          audioRef.current = new Audio("/audio/trilha-sonora.mp3");
+          audioRef.current.loop = true;
+        }
 
-      audioRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          // autoplay bloqueado
-          setIsPlaying(false);
-        });
-    }, 300); // 300ms de delay após o overlay sumir
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // autoplay bloqueado
+            setIsPlaying(false);
+          });
+      }, 300); // 300ms de delay após o overlay sumir
 
-    return () => clearTimeout(timer);
-  }
-}, [showOverlay]);
-
+      return () => clearTimeout(timer);
+    }
+  }, [showOverlay]);
 
   const toggleAudio = useCallback(() => {
     setIsPlaying((prev) => !prev);
@@ -70,7 +72,10 @@ export default function Page() {
 
   const confirmar = useCallback(async () => {
     if (!nome.trim()) {
-      setToast({ message: "Digite seu nome antes de confirmar!", type: "error" });
+      setToast({
+        message: "Digite seu nome antes de confirmar!",
+        type: "error",
+      });
       return;
     }
 
@@ -83,7 +88,10 @@ export default function Page() {
       });
 
       const data = await res.json();
-      setToast({ message: data.message, type: data.success ? "success" : "error" });
+      setToast({
+        message: data.message,
+        type: data.success ? "success" : "error",
+      });
 
       if (data.success) setNome("");
     } catch {
@@ -92,7 +100,6 @@ export default function Page() {
       setLoading(false);
     }
   }, [nome]);
-
 
   return (
     <div className="w-dvw bg-background overflow-x-hidden">
@@ -124,9 +131,13 @@ export default function Page() {
       {/* HERO */}
 
       <div className="z-2 relative w-full aspect-square overflow-hidden h-[500px]">
-        <Image src={flower} alt="" className="z-3 absolute -right-[80px] -top-[100px]" />
+        <Image
+          src={flower}
+          alt=""
+          className="z-3 absolute -right-[80px] -top-[100px]"
+        />
 
-{/* === OVERLAY COM ANIMAÇÃO === */}
+        {/* === OVERLAY COM ANIMAÇÃO === */}
         <AnimatePresence>
           {showOverlay && (
             <motion.div
@@ -160,7 +171,10 @@ export default function Page() {
               Nossa trilha
             </p>
 
-            <div onClick={toggleAudio} className="relative w-auto max-h-[130px] bg-white/50 rounded-full flex items-center justify-center p-2">
+            <div
+              onClick={toggleAudio}
+              className="relative w-auto max-h-[130px] bg-white/50 rounded-full flex items-center justify-center p-2"
+            >
               <Image src={spCode} alt="" className="h-[70px] w-fit" />
 
               {/* === Botão de play/pause === */}
@@ -212,17 +226,28 @@ export default function Page() {
           </motion.div>
         )}
 
-        <Image src="/casal-hero.png" alt="Casal" fill className="z-1 object-cover" />
+        <Image
+          src="/casal-hero.png"
+          alt="Casal"
+          fill
+          className="z-1 object-cover"
+        />
       </div>
 
       {/* Versículo */}
       <section className="relative p-5 flex">
-        <Image src={sheet} alt="Folha decorativa" className="absolute -left-[60px] -bottom-2" />
+        <Image
+          src={sheet}
+          alt="Folha decorativa"
+          className="absolute -left-[60px] -bottom-2"
+        />
         <div className="z-2 flex-1 flex flex-col gap-2.5 p-3 bg-[#F5F5F5] border-r-[3px] border-[#607763]">
           <p className="text-center font-fahk font-semibold leading-[120%] text-[#607763]">
             Acima de tudo, porém, revistam-se do amor, que é o elo perfeito
           </p>
-          <p className="font-inter font-semibold text-[14px] text-[#784C00]">Colossenses 3:14</p>
+          <p className="font-inter font-semibold text-[14px] text-[#784C00]">
+            Colossenses 3:14
+          </p>
         </div>
       </section>
 
@@ -249,12 +274,12 @@ export default function Page() {
             29
           </p>
           <p className="text-[#434634] font-fahk font-medium text-center">
-            16 HORAS
+            16:30 HORAS
           </p>
         </div>
         <p className="text-[#434634] font-fahk font-medium text-center">2025</p>
       </div>
-      
+
       <div className="p-5 flex flex-col gap-[8px]">
         <p className="text-[#434634] font-fahk font-medium">Local</p>
         <div className="overflow-hidden rounded-3xl">
