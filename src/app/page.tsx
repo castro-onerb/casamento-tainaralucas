@@ -274,7 +274,7 @@ export default function Page() {
             29
           </p>
           <p className="text-[#434634] font-fahk font-medium text-center">
-            16:30 HORAS
+            16:30
           </p>
         </div>
         <p className="text-[#434634] font-fahk font-medium text-center">2025</p>
